@@ -74,11 +74,7 @@ abstract contract NeoXCommitReveal {
     /// @return requestId Request ID for the subsequent _reveal call.
     function _commit() internal returns (uint256 requestId) {
         requestId = nextRequestId++;
-        requests[requestId] = Request({
-            requester: msg.sender,
-            commitBlock: block.number,
-            revealed: false
-        });
+        requests[requestId] = Request({requester: msg.sender, commitBlock: block.number, revealed: false});
         emit Committed(requestId, msg.sender, block.number);
     }
 
@@ -101,16 +97,18 @@ abstract contract NeoXCommitReveal {
 
         // Mix blockhash (containing BLS signature entropy) with requestId and requester
         // to ensure different requests and different users get different random numbers.
-        uint256 randomness = uint256(
-            keccak256(abi.encodePacked(hash, requestId, req.requester))
-        );
+        uint256 randomness = uint256(keccak256(abi.encodePacked(hash, requestId, req.requester)));
 
         emit Revealed(requestId, randomness);
         return randomness;
     }
 
     /// @notice Query request status.
-    function getRequest(uint256 requestId) external view returns (address requester, uint256 commitBlock, bool revealed) {
+    function getRequest(uint256 requestId)
+        external
+        view
+        returns (address requester, uint256 commitBlock, bool revealed)
+    {
         Request storage req = requests[requestId];
         return (req.requester, req.commitBlock, req.revealed);
     }

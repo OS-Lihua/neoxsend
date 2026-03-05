@@ -36,7 +36,7 @@ contract NeoXCommitRevealTest is Test {
         uint256 result = game.reveal(requestId);
         assertTrue(result != 0);
 
-        (, , revealed) = game.getRequest(requestId);
+        (,, revealed) = game.getRequest(requestId);
         assertTrue(revealed);
     }
 
