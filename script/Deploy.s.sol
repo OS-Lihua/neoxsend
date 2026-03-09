@@ -3,6 +3,7 @@ pragma solidity ^0.8.28;
 
 import {Script, console} from "forge-std/Script.sol";
 import {NeoXRandomness} from "../src/NeoXRandomness.sol";
+import {MockGame} from "../test/mock/MockGame.sol";
 
 /// @title Deploy
 /// @notice Deployment script for NeoX BLS Randomness contracts.
@@ -27,6 +28,9 @@ contract DeployScript is Script {
 
         NeoXRandomness randomness = new NeoXRandomness();
         console.log("NeoXRandomness deployed at:", address(randomness));
+
+        MockGame mockGame = new MockGame();
+        console.log("MockGame deployed at:", address(mockGame));
 
         vm.stopBroadcast();
     }

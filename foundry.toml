@@ -7,4 +7,4 @@ libs = ["lib"]
 
 [rpc_endpoints]
 neox_mainnet = "https://mainnet-1.rpc.banelabs.org"
-neox_testnet = "https://neoxt4seed1.ngd.network"
+neox_testnet = "https://testnet.rpc.banelabs.org"
