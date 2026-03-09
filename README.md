@@ -67,7 +67,14 @@ forge test --fork-url https://mainnet-1.rpc.banelabs.org -vvv
 ### Deploy
 
 ```shell
-forge script script/NeoXRandomness.s.sol:NeoXRandomnessScript --rpc-url https://mainnet-1.rpc.banelabs.org --private-key <your_private_key> --broadcast
+# Import your private key into Foundry's keystore (one-time setup)
+cast wallet import deployer --interactive
+
+# Deploy to NeoX mainnet
+forge script script/Deploy.s.sol --account deployer --broadcast --rpc-url neox_mainnet
+
+# Deploy to NeoX testnet
+forge script script/Deploy.s.sol --account deployer --broadcast --rpc-url neox_testnet
 ```
 
 ## File Structure
@@ -80,5 +87,5 @@ test/
   NeoXRandomness.t.sol    # NeoXRandomness tests
   NeoXCommitReveal.t.sol  # NeoXCommitReveal tests
 script/
-  NeoXRandomness.s.sol    # Deployment script
+  Deploy.s.sol            # Deployment script
 ```

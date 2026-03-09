@@ -67,7 +67,14 @@ forge test --fork-url https://mainnet-1.rpc.banelabs.org -vvv
 ### 部署
 
 ```shell
-forge script script/NeoXRandomness.s.sol:NeoXRandomnessScript --rpc-url https://mainnet-1.rpc.banelabs.org --private-key <your_private_key> --broadcast
+# 将私钥导入 Foundry keystore（仅需一次）
+cast wallet import deployer --interactive
+
+# 部署到 NeoX 主网
+forge script script/Deploy.s.sol --account deployer --broadcast --rpc-url neox_mainnet
+
+# 部署到 NeoX 测试网
+forge script script/Deploy.s.sol --account deployer --broadcast --rpc-url neox_testnet
 ```
 
 ## 文件结构
@@ -80,5 +87,5 @@ test/
   NeoXRandomness.t.sol    # NeoXRandomness 测试
   NeoXCommitReveal.t.sol  # NeoXCommitReveal 测试
 script/
-  NeoXRandomness.s.sol    # 部署脚本
+  Deploy.s.sol            # 部署脚本
 ```
